@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "site_id": "ZJY-SITE-001",
+  "name_zh": "拙政园",
+  "name_en": "Humble Administrator's Garden",
+  "baseline": "present_day",
+  "area_m2": 51950,
+  "area_source_ids": ["REF-001", "REF-003"],
+  "geographic_reference_point": {
+    "crs": "EPSG:4326",
+    "latitude": 31.324367,
+    "longitude": 120.629061,
+    "source_id": "REF-003",
+    "meaning": "UNESCO property reference coordinate; not a survey control point or local coordinate origin"
+  },
+  "local_coordinate_system": {
+    "status": "not_established",
+    "units": "meters",
+    "axis_convention": {"x": "east", "y": "north", "z": "up"},
+    "origin_definition": null,
+    "source_crs": null
+  },
+  "site_boundary": {
+    "status": "not_digitized",
+    "geometry_file": null,
+    "source_ids": []
+  },
+  "sections": ["east", "central", "west", "residential"],
+  "water_area_claims": [
+    {
+      "claim": "approximately_one_third",
+      "source_id": "REF-001",
+      "status": "conflicts_with_other_public_description",
+      "use_for_geometry": false
+    },
+    {
+      "claim": "approximately_one_fifth",
+      "source_id": "REF-006",
+      "status": "conflicts_with_other_public_description",
+      "use_for_geometry": false
+    }
+  ],
+  "open_questions": [
+    "Obtain a reliable current site plan or authorized measured survey.",
+    "Define the local coordinate origin and transformation from the source coordinate reference system.",
+    "Reconcile published water-area proportions before using them as quantitative statements.",
+    "Establish a dated current-condition reference capture set."
+  ],
+  "notes": [
+    "The area value is a published site-level figure, not a substitute for a digitized boundary.",
+    "The UNESCO coordinate is a geographic reference point only and must not be treated as a surveyed centroid."
+  ]
+}
