@@ -1,0 +1,53 @@
+# Generated build output
+/build/
+/dist/
+/artifacts/
+
+# Blender generated assets and backups
+*.blend1
+*.blend@
+*.blend
+*.fbx
+*.obj
+*.mtl
+*.abc
+*.usd
+*.usda
+*.usdc
+*.glb
+*.gltf
+*.exr
+*.hdr
+*.tif
+*.tiff
+*.psd
+
+# Unreal Engine generated files
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+.idea/
+*.sln
+*.slnx
+*.xcodeproj
+*.xcworkspace
+*.uasset
+*.umap
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Local environment
+.env
+.env.*
+!.env.example
