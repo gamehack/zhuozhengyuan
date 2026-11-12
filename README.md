@@ -64,3 +64,14 @@ python .\scripts\validate_data.py
 ## Current status
 
 See [P0_PLAN.md](docs/P0_PLAN.md) and [WORKFLOW.md](docs/WORKFLOW.md). No measured garden geometry has been committed yet.
+
+
+## Research status — important constraint
+
+The repository now contains an official named-feature register and a source-backed research status note. However, a verified comprehensive **present-day measured site plan** has not yet been obtained. Historical drawings and the 1986 aerial-photo study are valuable references, but they must not be presented as current survey data.
+
+- [Research status and source strategy](research/RESEARCH_STATUS.md)
+- [Official named-feature register](data/asset-manifest/feature-register.csv)
+- [Source register](research/references.csv)
+
+The project intentionally has no local coordinate origin, site boundary geometry, or fabricated object coordinates yet.
