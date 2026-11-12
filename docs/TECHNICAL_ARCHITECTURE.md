@@ -43,6 +43,16 @@ The current machine has a Ryzen 7 PRO 6850HS, Radeon 680M integrated graphics, 1
 ### Later quality profile
 Evaluate Lumen, Nanite, Virtual Shadow Maps, foliage instancing, and higher-quality water only after the target GPU and memory budget are known. Use Nanite selectively; dense foliage generally requires instancing and LOD strategy rather than blindly converting every plant to Nanite.
 
+## Reconstruction layers
+
+Use a three-layer reconstruction model to separate the geometry that defines the garden from details that can change over time:
+
+1. **Base layer:** site boundary, ground levels, water bodies, islands, major landform, and the overall water/land composition.
+2. **Attached layer:** the measured positions and footprints of halls, pavilions, bridges, corridors, paths, rockeries, and other fixed structures.
+3. **Terminal/detail layer:** exact building forms, bank construction, stone profiles, vegetation, materials, joinery, plaques, couplets, and movable details.
+
+This hierarchy is informed by the analytical framework discussed in REF-011. It is a project modeling strategy, not a claim that the source author has prescribed our software architecture. Complete and validate the base layer before spending time on terminal details.
+
 ## Scene organization
 Use stable collections/folders and asset IDs. Keep reference objects, terrain, water, architecture, rocks, vegetation, paths, lighting, and export sets separate. Export only the intended collection or tagged objects.
 
