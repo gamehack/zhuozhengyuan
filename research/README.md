@@ -17,4 +17,4 @@ The source register is research metadata, not a license grant. Publicly accessib
 - The exact current site boundary, local coordinate datum, detailed current measured plan, and object-level dimensions have not yet been established in this repository.
 - Public sources disagree on the fraction of the garden occupied by water. This conflict is recorded and must not be used as geometry input until reconciled.
 
-See references.csv and data/site-baseline.json.
+See references.csv, RESEARCH_STATUS.md, and data/site-baseline.json. The 2026 survey-data commentary is treated as a research warning, not an official determination.
