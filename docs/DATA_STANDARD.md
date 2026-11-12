@@ -40,6 +40,10 @@ Grade D is allowed only for clearly marked placeholders. It cannot pass final ac
 ## Asset record requirements
 Each asset record must include asset_id, asset_type, area, name_zh, location_local_m, rotation_deg, evidence_level, source_ids, and modeling_status. Dimensions are optional until evidence exists. If present, they must be positive and expressed as length, width, height in meters.
 
+## Feature register versus modeled asset manifest
+
+The feature register in data/asset-manifest/feature-register.csv records officially named garden places before their precise positions are known. Its ZJY-FEAT IDs are catalogue references, not 3D asset IDs. Create a ZJY-BLD/TRE/ROC/WAT/BRG/PTH/OBJ asset ID only when an evidence-backed spatial record can be created. A feature may map to one or more modeled assets later.
+
 ## Source register
 Every source receives a REF ID in research/references.csv. Record publisher, URL, access date, source type, permission status, and notes. Asset source_ids must point to existing REF IDs.
 
