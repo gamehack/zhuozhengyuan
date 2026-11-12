@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 
 import bpy
+from mathutils import Vector
 
 TEST_TAG = "PIPELINE_TEST_ONLY"
 
@@ -160,7 +161,7 @@ def main():
     bpy.ops.object.camera_add(location=(13.0, -18.0, 12.0))
     camera = bpy.context.object
     camera.name = "TEST_Camera"
-    camera.rotation_euler = (1.05, 0.0, 0.62)
+    camera.rotation_euler = (Vector((0.0, 0.0, 1.0)) - camera.location).to_track_quat("-Z", "Y").to_euler()
     move_to_collection(camera, lighting_collection)
     scene.camera = camera
 
