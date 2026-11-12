@@ -23,6 +23,8 @@ Prove a repeatable local pipeline from structured data and Blender Python to FBX
 - [x] Register initial official and UNESCO sources.
 - [x] Record published site area and reference location as metadata only.
 - [x] Record that no survey datum or site boundary geometry has been established.
+- [x] Seed an official named-feature register without inventing positions or dimensions.
+- [x] Document the historical-survey and present-day measurement gap.
 - [ ] Obtain a reliable current site plan or authorized measured drawing.
 - [ ] Build the source-backed asset inventory.
 - [ ] Capture and register fixed viewpoints.
