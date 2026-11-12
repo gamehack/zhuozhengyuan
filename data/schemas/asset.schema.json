@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gamehack/zhuozhengyuan/blob/main/data/schemas/asset.schema.json",
+  "title": "Zhuozhengyuan Asset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["asset_id", "asset_type", "area", "name_zh", "location_local_m", "rotation_deg", "evidence_level", "source_ids", "modeling_status"],
+  "properties": {
+    "asset_id": {"type": "string", "pattern": "^ZJY-(BLD|TRE|ROC|WAT|BRG|PTH|OBJ)-[0-9]{3,}$"},
+    "asset_type": {"enum": ["building", "tree", "rock", "water", "bridge", "path", "object"]},
+    "area": {"enum": ["east", "central", "west", "residential", "unknown"]},
+    "name_zh": {"type": "string", "minLength": 1},
+    "name_en": {"type": "string"},
+    "location_local_m": {"$ref": "#/$defs/vector3"},
+    "rotation_deg": {"$ref": "#/$defs/vector3"},
+    "dimensions_m": {
+      "type": ["array", "null"],
+      "items": {"type": "number", "exclusiveMinimum": 0},
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "evidence_level": {"enum": ["A", "B", "C", "D"]},
+    "source_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^REF-[0-9]{3,}$"},
+      "uniqueItems": true
+    },
+    "modeling_status": {"enum": ["unresearched", "researched", "blockout", "modeled", "reviewed", "verified"]},
+    "notes": {"type": "string"}
+  },
+  "$defs": {
+    "vector3": {
+      "type": "array",
+      "items": {"type": "number"},
+      "minItems": 3,
+      "maxItems": 3
+    }
+  }
+}
