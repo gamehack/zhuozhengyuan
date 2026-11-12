@@ -2,7 +2,8 @@
 
 ## Files
 - site-baseline.json — source-backed high-level facts and unresolved baseline questions.
-- asset-manifest/assets.json — inventory of modeled or planned assets.
+- asset-manifest/assets.json — inventory of modeled assets with spatial coordinates and evidence.
+- asset-manifest/feature-register.csv — official named-feature catalogue; names and areas are registered, but positions and geometry are intentionally unresolved.
 - scene-layout/viewpoints.json — fixed reference viewpoints.
 - schemas/ — JSON Schema contracts for asset and viewpoint records.
 
