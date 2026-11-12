@@ -5,7 +5,10 @@
   "name_en": "Humble Administrator's Garden",
   "baseline": "present_day",
   "area_m2": 51950,
-  "area_source_ids": ["REF-001", "REF-003"],
+  "area_source_ids": [
+    "REF-001",
+    "REF-003"
+  ],
   "geographic_reference_point": {
     "crs": "EPSG:4326",
     "latitude": 31.324367,
@@ -16,7 +19,11 @@
   "local_coordinate_system": {
     "status": "not_established",
     "units": "meters",
-    "axis_convention": {"x": "east", "y": "north", "z": "up"},
+    "axis_convention": {
+      "x": "east",
+      "y": "north",
+      "z": "up"
+    },
     "origin_definition": null,
     "source_crs": null
   },
@@ -25,7 +32,12 @@
     "geometry_file": null,
     "source_ids": []
   },
-  "sections": ["east", "central", "west", "residential"],
+  "sections": [
+    "east",
+    "central",
+    "west",
+    "residential"
+  ],
   "water_area_claims": [
     {
       "claim": "approximately_one_third",
@@ -48,6 +60,68 @@
   ],
   "notes": [
     "The area value is a published site-level figure, not a substitute for a digitized boundary.",
-    "The UNESCO coordinate is a geographic reference point only and must not be treated as a surveyed centroid."
-  ]
+    "The UNESCO coordinate is a geographic reference point only and must not be treated as a surveyed centroid.",
+    "Published whole-site area figures are inconsistent; 51,950 m² is a working reference value only and must not be used as a substitute for a measured boundary.",
+    "The 1986 aerial-photo figures are historical and must not be mixed with present-day measurements."
+  ],
+  "published_area_claims": [
+    {
+      "claim": "51950_square_meters",
+      "source_ids": [
+        "REF-001",
+        "REF-003"
+      ],
+      "status": "working_reference_value_not_a_current_survey",
+      "use_for_geometry": false
+    },
+    {
+      "claim": "62_mu",
+      "source_ids": [
+        "REF-008"
+      ],
+      "status": "conflicts_with_other_published_figures",
+      "use_for_geometry": false
+    },
+    {
+      "claim": "approximately_50000_square_meters",
+      "source_ids": [
+        "REF-008"
+      ],
+      "status": "alternative_published_figure",
+      "use_for_geometry": false
+    },
+    {
+      "claim": "52000_square_meters",
+      "source_ids": [
+        "REF-008",
+        "REF-009"
+      ],
+      "status": "alternative_published_figure",
+      "use_for_geometry": false
+    }
+  ],
+  "published_section_area_claims": [
+    {
+      "area": "central",
+      "claim": "approximately_18_5_mu",
+      "source_id": "REF-008",
+      "status": "approximate_published_figure_not_a_survey"
+    },
+    {
+      "area": "west",
+      "claim": "approximately_12_5_mu",
+      "source_id": "REF-008",
+      "status": "approximate_published_figure_not_a_survey"
+    }
+  ],
+  "historical_aerial_reference": {
+    "image_acquisition_year": 1986,
+    "paper_publication_year": 1993,
+    "image_scale": "1:1000 color image derived from 1:10000 aerial photography",
+    "historical_site_area_m2": 43788,
+    "historical_water_area_m2": 7640,
+    "source_id": "REF-010",
+    "status": "historical_1986_state_only",
+    "use_for_present_day_geometry": false
+  }
 }
