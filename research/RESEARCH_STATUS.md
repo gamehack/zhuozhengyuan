@@ -16,7 +16,7 @@
 
 A 2026 commentary by Liu Run'en argues that the most complete detailed drawings currently known to the author are largely from the mid-20th-century survey work led by Liu Dunzhen's team, and that these drawings do not fully represent later changes or all vertical/detail information. The author further argues that a comprehensive contemporary measured survey is not readily available.
 
-This is a specialist commentary, not an official survey inventory. Treat it as a high-priority warning and verify directly with the garden management office, conservation authorities, libraries, and the cited publications.
+This is a specialist commentary, not an official survey inventory. Treat it as a high-priority warning and verify directly with the garden management office, conservation authorities, libraries, and the cited publications. The same commentary warns that present-day scenic names may have been reassigned to later structures; for this project, use current official names for cataloguing but do not infer that a current building is physically identical to a Ming-period structure without separate evidence.
 
 **Project consequence:** do not assume that a current, complete, downloadable CAD plan exists. P0/P1 must establish a source hierarchy and may need to combine historic measured drawings, historic aerial evidence, official present-day photographs, and authorized on-site capture.
 
