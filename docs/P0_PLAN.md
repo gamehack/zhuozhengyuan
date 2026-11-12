@@ -63,3 +63,13 @@ Use a small test scene, conservative scalability, no hardware ray tracing or Lum
 
 ## Exit criteria
 See docs/QUALITY_STANDARDS.md. The critical end-to-end test is Blender Python → BLEND → FBX → UE import → 1 m calibration → Windows walkthrough → packaged executable.
+
+
+## GitHub task tracking
+
+- [P0-01 — Validate local Windows toolchain](https://github.com/gamehack/zhuozhengyuan/issues/1)
+- [P0-02 — Obtain authoritative current site plan and survey material](https://github.com/gamehack/zhuozhengyuan/issues/2)
+- [P0-03 — Run Blender fixture and export FBX](https://github.com/gamehack/zhuozhengyuan/issues/3)
+- [P0-04 — Install/confirm UE 5.8.4 and create project](https://github.com/gamehack/zhuozhengyuan/issues/4)
+- [P0-05 — Verify FBX scale, axes, and materials in Unreal](https://github.com/gamehack/zhuozhengyuan/issues/5)
+- [P0-06 — Complete Windows walkthrough and package acceptance](https://github.com/gamehack/zhuozhengyuan/issues/6)
