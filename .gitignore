@@ -3,24 +3,10 @@
 /dist/
 /artifacts/
 
-# Blender generated assets and backups
+# Blender backups and local caches
 *.blend1
 *.blend@
-*.blend
-*.fbx
-*.obj
-*.mtl
-*.abc
-*.usd
-*.usda
-*.usdc
-*.glb
-*.gltf
-*.exr
-*.hdr
-*.tif
-*.tiff
-*.psd
+.blender/
 
 # Unreal Engine generated files
 Binaries/
@@ -33,8 +19,6 @@ Saved/
 *.slnx
 *.xcodeproj
 *.xcworkspace
-*.uasset
-*.umap
 
 # Python
 __pycache__/
@@ -51,3 +35,7 @@ Desktop.ini
 .env
 .env.*
 !.env.example
+
+# Do not globally ignore .blend, .fbx, .uasset, or .umap.
+# They are source assets. Decide on Git LFS or object storage before adding
+# large binary assets; keep generated test outputs under /build/ only.
