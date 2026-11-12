@@ -45,6 +45,12 @@ def main():
         obj.select_set(True)
     bpy.context.view_layer.objects.active = objects[0]
 
+    if not hasattr(bpy.ops.export_scene, "fbx"):
+        raise RuntimeError(
+            "FBX exporter is unavailable. In Blender 5.2, open Edit > Preferences > Get Extensions, "
+            "search for 'FBX format', install/enable it, then rerun the export."
+        )
+
     requested = {
         "filepath": str(output_path),
         "use_selection": True,
