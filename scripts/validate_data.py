@@ -21,6 +21,8 @@ REFERENCE_HEADERS = {
     "reference_id", "title", "source_type", "publisher", "access_date",
     "url", "permission_status", "related_area", "notes"
 }
+FEATURE_ID = re.compile(r"^ZJY-FEAT-[0-9]{3,}$")
+FEATURE_HEADERS = {"feature_ref", "name_zh", "area", "feature_type", "source_ids", "position_status", "geometry_status", "notes"}
 
 
 def load_json(path: Path):
@@ -148,6 +150,38 @@ def validate_viewpoints(path: Path, reference_ids: set[str], errors: list[str]):
                     errors.append(f"{label} {view_id}: unknown source_id {source_id}")
 
 
+def validate_feature_register(path: Path, reference_ids: set[str], errors: list[str]):
+    if not path.exists():
+        errors.append(f"Missing feature register: {path}")
+        return
+    seen = set()
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        missing = FEATURE_HEADERS - set(reader.fieldnames or [])
+        if missing:
+            errors.append(f"Feature register missing headers: {sorted(missing)}")
+            return
+        for line_number, row in enumerate(reader, start=2):
+            feature_id = (row.get("feature_ref") or "").strip()
+            if not FEATURE_ID.fullmatch(feature_id):
+                errors.append(f"Feature register line {line_number}: invalid feature_ref {feature_id!r}")
+            if feature_id in seen:
+                errors.append(f"Feature register line {line_number}: duplicate feature_ref {feature_id}")
+            seen.add(feature_id)
+            if not (row.get("name_zh") or "").strip():
+                errors.append(f"Feature register line {line_number}: name_zh is empty")
+            if (row.get("area") or "").strip() not in {"east", "central", "west", "residential"}:
+                errors.append(f"Feature register line {line_number}: invalid area")
+            if not (row.get("feature_type") or "").strip():
+                errors.append(f"Feature register line {line_number}: feature_type is empty")
+            source_ids = [value.strip() for value in (row.get("source_ids") or "").split(";") if value.strip()]
+            if not source_ids:
+                errors.append(f"Feature register line {line_number}: source_ids is empty")
+            for source_id in source_ids:
+                if source_id not in reference_ids:
+                    errors.append(f"Feature register line {line_number}: unknown source_id {source_id}")
+
+
 def validate_baseline(path: Path, reference_ids: set[str], errors: list[str]):
     if not path.exists():
         errors.append(f"Missing site baseline: {path}")
@@ -177,6 +211,7 @@ def validate_all(root: Path = ROOT) -> list[str]:
     errors: list[str] = []
     reference_ids = load_reference_ids(root / "research" / "references.csv", errors)
     validate_asset_manifest(root / "data" / "asset-manifest" / "assets.json", reference_ids, errors)
+    validate_feature_register(root / "data" / "asset-manifest" / "feature-register.csv", reference_ids, errors)
     validate_viewpoints(root / "data" / "scene-layout" / "viewpoints.json", reference_ids, errors)
     validate_baseline(root / "data" / "site-baseline.json", reference_ids, errors)
     return errors
