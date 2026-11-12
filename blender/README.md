@@ -21,5 +21,7 @@ The generator creates a synthetic pavilion/wall/pond/path/tree test fixture. It 
 
 Generated files are written under build/pipeline-test and are ignored by Git.
 
+If FBX export reports that the operator is unavailable, open Blender Preferences > Get Extensions, search for **FBX format**, and install/enable the exporter before rerunning.
+
 ## Real asset policy
 Do not create a real garden asset until the relevant source reference and evidence grade are recorded in the asset manifest. Use parametric geometry where dimensions are known; use a separate evidence-backed refinement task for complex historic geometry.
