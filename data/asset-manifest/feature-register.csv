@@ -1,0 +1,28 @@
+feature_ref,name_zh,area,feature_type,source_ids,position_status,geometry_status,notes
+ZJY-FEAT-001,秫香馆,east,hall,REF-008,not_located,not_modeled,Officially listed attraction; position and dimensions still require evidence.
+ZJY-FEAT-002,涵青亭,east,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; position and dimensions still require evidence.
+ZJY-FEAT-003,天泉亭,east,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; position and dimensions still require evidence.
+ZJY-FEAT-004,芙蓉榭,east,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; position and dimensions still require evidence.
+ZJY-FEAT-005,缀云峰,east,rockery_feature,REF-008,not_located,not_modeled,Officially listed rockery feature; exact extent and profile unknown.
+ZJY-FEAT-006,香洲,central,boat_pavilion,REF-008,not_located,not_modeled,Officially listed attraction; obtain measured drawings and multi-view references.
+ZJY-FEAT-007,雪香云蔚亭,central,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; obtain measured drawings and multi-view references.
+ZJY-FEAT-008,梧竹幽居,central,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; obtain measured drawings and multi-view references.
+ZJY-FEAT-009,松风水阁,central,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; obtain measured drawings and multi-view references.
+ZJY-FEAT-010,小飞虹,central,bridge,REF-008,not_located,not_modeled,Officially listed attraction; geometry must include bridge deck, railings, supports, and relation to water.
+ZJY-FEAT-011,远香堂,central,hall,REF-008,not_located,not_modeled,Officially listed attraction; priority candidate for architectural sample after evidence review.
+ZJY-FEAT-012,海棠春坞,central,garden_courtyard,REF-008,not_located,not_modeled,Officially listed garden space; not a single building asset.
+ZJY-FEAT-013,听雨轩,central,pavilion,REF-008;REF-014,not_located,not_modeled,Officially listed attraction; a technical reference index lists measured drawings, pending verification.
+ZJY-FEAT-014,玉兰堂,central,hall,REF-008,not_located,not_modeled,Officially listed attraction; confirm present-day name and building history before modeling.
+ZJY-FEAT-015,微观楼,central,building,REF-008,not_located,not_modeled,Officially listed attraction; verify name, location, and current status.
+ZJY-FEAT-016,见山楼,central,building,REF-008,not_located,not_modeled,Officially listed attraction; verify current fabric and measured dimensions.
+ZJY-FEAT-017,枇杷园,central,garden_courtyard,REF-008,not_located,not_modeled,Officially listed garden-within-a-garden space.
+ZJY-FEAT-018,笠亭,west,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; obtain multi-view references.
+ZJY-FEAT-019,宜两亭,west,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; obtain multi-view references.
+ZJY-FEAT-020,卅六鸳鸯馆（十八曼陀罗花馆）,west,hall_complex,REF-008,not_located,not_modeled,Officially listed hall complex and alternate naming; model as one feature pending architectural survey.
+ZJY-FEAT-021,倒影楼,west,building,REF-008,not_located,not_modeled,Officially listed attraction; obtain multi-view references.
+ZJY-FEAT-022,留听阁,west,pavilion,REF-008;REF-014,not_located,not_modeled,Officially listed attraction; technical reference index lists measured drawings, pending verification.
+ZJY-FEAT-023,浮翠阁,west,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; obtain multi-view references.
+ZJY-FEAT-024,塔影亭,west,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; obtain multi-view references.
+ZJY-FEAT-025,与谁同坐轩,west,pavilion,REF-008,not_located,not_modeled,Officially listed attraction; obtain multi-view references.
+ZJY-FEAT-026,波形廊,west,corridor,REF-008,not_located,not_modeled,Officially listed attraction; route and elevation profile need measurement.
+ZJY-FEAT-027,园林博物馆, residential,museum_residential_complex,REF-008,not_located,not_modeled,Residential section; survey scope and public-access boundaries need confirmation.
