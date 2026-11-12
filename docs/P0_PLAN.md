@@ -7,7 +7,7 @@ Prove a repeatable local pipeline from structured data and Blender Python to FBX
 
 ### P0-1 — Local environment and hardware validation
 - [x] Record current hardware baseline.
-- [ ] Confirm Blender executable and version from PowerShell.
+- [x] Confirm Blender executable and version from the prior Windows validation (Blender 5.2.4 LTS).
 - [ ] Install or confirm Unreal Engine 5.8.4.
 - [ ] Confirm available disk space and editor launch.
 - [ ] Keep initial editor settings conservative for Radeon 680M / 16 GB RAM.
