@@ -24,7 +24,15 @@ $OutputParent = Split-Path -Parent $OutputFile
 New-Item -ItemType Directory -Force -Path $OutputParent | Out-Null
 $Exporter = Join-Path $RepoRoot "blender\scripts\export_fbx.py"
 
+# Do not let an old FBX survive a failed export and look like a fresh artifact.
+Remove-Item -LiteralPath $OutputFile -Force -ErrorAction SilentlyContinue
+
 & $BlenderExe --background $BlendFile --python $Exporter -- --output $OutputFile
-if ($LASTEXITCODE -ne 0) { throw "Blender FBX exporter failed with exit code $LASTEXITCODE." }
-if (-not (Test-Path $OutputFile)) { throw "Expected FBX output was not created: $OutputFile" }
+$BlenderExitCode = $LASTEXITCODE
+if ($BlenderExitCode -ne 0) {
+    throw "Blender FBX exporter failed with exit code $BlenderExitCode."
+}
+if (-not (Test-Path -LiteralPath $OutputFile)) {
+    throw "Blender exited successfully but expected FBX output was not created: $OutputFile"
+}
 Write-Host "FBX exported: $OutputFile" -ForegroundColor Green
