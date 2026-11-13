@@ -42,8 +42,10 @@ Prove a repeatable local pipeline from structured data and Blender Python to FBX
 
 ### P0-5 — Unreal import and walkthrough
 - [x] Create the UE 5.8.4 Blank Blueprint project locally and place its copy under unreal/Zhuozhengyuan.
-- [ ] Import the calibration FBX.
-- [ ] Verify 1 m scale, axis orientation, normals, materials, and collision.
+- [x] Commit and push the initial UE project baseline (07c8201, 2026-11-13).
+- [ ] Import the calibration FBX from build/pipeline-test/pipeline-test.fbx into Content/PipelineTest.
+- [ ] Verify the 1 m cube (100 cm), X/Y bars, normals, and material assignments; record evidence.
+- [ ] Add and test simple ground collision.
 - [ ] Create a minimal first-person walkthrough.
 - [ ] Record editor performance and memory usage.
 
