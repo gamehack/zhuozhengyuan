@@ -104,7 +104,26 @@ def main():
     scene.unit_settings.system = "METRIC"
     scene.unit_settings.length_unit = "METERS"
     scene.unit_settings.scale_length = 1.0
-    scene.render.engine = "BLENDER_EEVEE_NEXT"
+    # Blender's render-engine identifiers vary across releases. This fixture
+    # does not render an image, but choose an installed engine so the saved
+    # .blend opens cleanly across Blender 4.x/5.x builds.
+    available_engines = scene.render.bl_rna.properties["engine"].enum_items.keys()
+    preferred_engines = (
+        "BLENDER_EEVEE_NEXT",
+        "BLENDER_EEVEE",
+        "BLENDER_WORKBENCH",
+        "CYCLES",
+    )
+    selected_engine = next(
+        (engine for engine in preferred_engines if engine in available_engines),
+        None,
+    )
+    if selected_engine is None:
+        raise RuntimeError(
+            f"No supported render engine found. Available: {list(available_engines)}"
+        )
+    scene.render.engine = selected_engine
+    print(f"Pipeline fixture render engine: {selected_engine}")
     scene.render.resolution_x = 1280
     scene.render.resolution_y = 720
     scene.render.resolution_percentage = 60
