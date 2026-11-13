@@ -32,9 +32,9 @@ Prove a repeatable local pipeline from structured data and Blender Python to FBX
 ### P0-4 — Blender automation
 - [x] Add a synthetic pipeline-test scene generator.
 - [x] Add a collection-scoped FBX export script.
-- [ ] Run scripts locally with Blender 5.2.4.
-- [ ] Confirm generated BLEND, FBX, and report.
-- [ ] Verify repeatability and object naming.
+- [x] Run scripts locally with Blender 5.2.4 (Windows, 2026-11-13).
+- [x] Confirm generated BLEND, FBX, and report (19 mesh objects exported, 2026-11-13).
+- [ ] Verify repeatability with a second clean run and compare object count/naming.
 
 ### P0-5 — Unreal import and walkthrough
 - [ ] Create the UE 5.8.4 project locally from the official template.
