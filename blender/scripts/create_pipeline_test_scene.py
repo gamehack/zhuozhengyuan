@@ -254,7 +254,7 @@ def main():
             "name": ground_collision.name,
             "render_mesh": ground.name,
             "shape": ground_collision["zjy_collision_shape"],
-            "dimensions_m": ground_collision["zjy_collision_dimensions_m"],
+            "dimensions_m": [float(value) for value in ground_collision["zjy_collision_dimensions_m"]],
             "expected_dimensions_m": [20.0, 16.0, 0.24],
         }],
         "units": "meters",
