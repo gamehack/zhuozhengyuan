@@ -50,7 +50,13 @@ def close_vector(actual, expected, tolerance):
 
 
 def get_collision_count(static_mesh):
-    # EditorStaticMeshLibrary is the documented UE 5.8 Python API for this query.
+    # Prefer the current subsystem API; retain the documented library fallback
+    # for engine builds where the subsystem is not exposed to Python.
+    subsystem_class = getattr(unreal, "StaticMeshEditorSubsystem", None)
+    if subsystem_class is not None:
+        subsystem = unreal.get_editor_subsystem(subsystem_class)
+        if subsystem is not None:
+            return int(subsystem.get_simple_collision_count(static_mesh))
     return int(unreal.EditorStaticMeshLibrary.get_simple_collision_count(static_mesh))
 
 
