@@ -13,8 +13,10 @@ import traceback
 import unreal
 
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
+REPO_ROOT = os.environ.get("ZJY_REPO_ROOT")
+if not REPO_ROOT:
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
 BUILD_DIR = os.path.join(REPO_ROOT, "build", "pipeline-test")
 ASSET_DIR = os.path.join(BUILD_DIR, "assets")
 MANIFEST_PATH = os.path.join(ASSET_DIR, "asset-export-manifest.json")
