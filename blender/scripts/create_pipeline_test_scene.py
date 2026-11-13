@@ -129,6 +129,7 @@ def add_box_collision(render_obj, collection):
     )
     collection.objects.link(collision)
     collision.matrix_world = render_obj.matrix_world.copy()
+    bpy.context.view_layer.update()
     collision.display_type = "WIRE"
     collision.hide_render = True
     collision["zjy_test_tag"] = TEST_TAG
