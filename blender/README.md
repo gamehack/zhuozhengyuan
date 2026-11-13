@@ -10,6 +10,10 @@ P0 targets Blender 5.2.4 LTS, matching the currently reported local installation
 - Validate scene units and object metadata.
 - Export only the intended collection to FBX.
 
+## Blender version compatibility
+
+The test-scene generator queries Blender's installed render-engine enum at runtime and selects an available engine. It does not assume that `BLENDER_EEVEE_NEXT` is present in every Blender 5.x build. The fixture does not render an image, so this setting only ensures the saved scene uses a valid engine identifier.
+
 ## P0 test
 Run from the repository root:
 
