@@ -97,6 +97,9 @@ def import_one_fbx(asset_tools, fbx_path):
     static_data = options.get_editor_property("static_mesh_import_data")
     set_if_supported(static_data, "combine_meshes", False, required=True)
     set_if_supported(static_data, "auto_generate_collision", False)
+    set_if_supported(static_data, "import_uniform_scale", 1.0)
+    set_if_supported(static_data, "import_rotation", unreal.Rotator(0.0, 0.0, 0.0))
+    set_if_supported(static_data, "import_translation", unreal.Vector(0.0, 0.0, 0.0))
     options.set_editor_property("static_mesh_import_data", static_data)
     task.set_editor_property("options", options)
 
