@@ -52,8 +52,20 @@ function Get-ZjyUnrealEngineRoot {
         }
     }
 
-    $SeenRoots = @{}
+    # Some Launcher configurations create a nested engine folder, e.g.
+    # ...\Epic Games\UE_5.8\UE_5.8\Engine\...
+    # Try both the manifest/configured root and common nested engine directory names.
+    $ExpandedRoots = [System.Collections.Generic.List[string]]::new()
     foreach ($Root in $Roots) {
+        if ([string]::IsNullOrWhiteSpace($Root)) { continue }
+        $null = $ExpandedRoots.Add($Root)
+        foreach ($NestedFolder in @("UE_5.8", "UE_5.8.4")) {
+            $null = $ExpandedRoots.Add((Join-Path $Root $NestedFolder))
+        }
+    }
+
+    $SeenRoots = @{}
+    foreach ($Root in $ExpandedRoots) {
         if ([string]::IsNullOrWhiteSpace($Root)) { continue }
 
         try {
