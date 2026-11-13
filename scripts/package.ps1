@@ -14,18 +14,14 @@ if (-not (Test-Path $ProjectFile)) {
     throw "Unreal project file not found: $ProjectFile. Create and validate the UE 5.8.4 project first."
 }
 
-$EngineRoots = @()
-if ($env:UE_5_8_ROOT) { $EngineRoots += $env:UE_5_8_ROOT }
-if ($env:UE_ROOT) { $EngineRoots += $env:UE_ROOT }
-$EngineRoots += "$env:ProgramFiles\Epic Games\UE_5.8"
-
-$RunUAT = $null
-foreach ($Root in $EngineRoots) {
-    $Candidate = Join-Path $Root "Engine\Build\BatchFiles\RunUAT.bat"
-    if (Test-Path $Candidate) { $RunUAT = $Candidate; break }
+. (Join-Path $PSScriptRoot "resolve-unreal.ps1")
+$UnrealRoot = Get-ZjyUnrealEngineRoot -RequiredMinorVersion "5.8"
+if (-not $UnrealRoot) {
+    throw "Unreal Engine 5.8 was not found in configured paths or Epic Games Launcher install manifests."
 }
-if (-not $RunUAT) {
-    throw "RunUAT.bat not found. Install UE 5.8.x or set UE_5_8_ROOT to the engine directory."
+$RunUAT = Join-Path $UnrealRoot "Engine\Build\BatchFiles\RunUAT.bat"
+if (-not (Test-Path -LiteralPath $RunUAT)) {
+    throw "Unreal Engine was detected at '$UnrealRoot' but RunUAT.bat is missing."
 }
 
 if (-not [System.IO.Path]::IsPathRooted($OutputDirectory)) {
