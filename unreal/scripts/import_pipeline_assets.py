@@ -89,7 +89,7 @@ def import_one_fbx(asset_tools, fbx_path):
     options = unreal.FbxImportUI()
     set_if_supported(options, "import_mesh", True, required=True)
     set_if_supported(options, "import_as_skeletal", False, required=True)
-    set_if_supported(options, "import_materials", False)
+    set_if_supported(options, "import_materials", True)
     set_if_supported(options, "import_textures", False)
     set_if_supported(options, "import_animations", False)
     set_if_supported(options, "import_collision", True)
