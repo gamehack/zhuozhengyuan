@@ -26,3 +26,44 @@ For the HP EliteBook 865 G9 (Radeon 680M integrated graphics, 16 GB RAM):
 
 ## Packaging
 Use scripts/package.ps1 only after a valid .uproject exists and the editor has successfully opened it. Packaging is not expected to work before local engine installation and project creation.
+
+
+## Verified local engine installation
+
+The Windows environment validator detected the user's installed engine on 2026-11-13:
+
+- Engine root: `C:\\Program Files\\Epic Games\\UE_5.8\\UE_5.8`
+- Version: **5.8.4**
+- Changelist: **58902052**
+- Editor executable: `Engine/Binaries/Win64/UnrealEditor.exe`
+
+The next local action is to create the Blueprint project from the editor wizard. Do not create a C++ project or compile engine source for P0.
+
+## Exact project creation procedure
+
+1. Launch `UnrealEditor.exe` from Epic Games Launcher, or run the detected executable.
+2. In the Project Browser select **Games** → **Blank**.
+3. Select **Blueprint** (not C++).
+4. Target platform: **Desktop**.
+5. Quality preset: **Scalable** (not Maximum Quality).
+6. Starter Content: **Off**.
+7. Project name: `Zhuozhengyuan`.
+8. Project location: the repository's `unreal` directory.
+9. Create the project. The expected project file is:
+   `unreal/Zhuozhengyuan/Zhuozhengyuan.uproject`.
+
+If the wizard asks whether to enable ray tracing, leave it disabled. Do not add optional plugins yet.
+
+After creation, open the project once, wait for shader compilation and initial asset discovery to finish, save, then close the editor. Keep the editor on Low scalability for the first test. Avoid opening Blender and other memory-heavy applications simultaneously on the 16 GB machine.
+
+## First local verification
+
+From the repository root:
+
+```powershell
+$Project = ".\\unreal\\Zhuozhengyuan\\Zhuozhengyuan.uproject"
+Test-Path $Project
+Get-Content $Project
+```
+
+Expected: `Test-Path` returns `True`. Do not run the packaging script yet; FBX import and first-person walkthrough are still pending.
