@@ -3,7 +3,7 @@
 ## P0 target
 Unreal Engine 5.8.4, Windows, Blueprint-first first-person walkthrough.
 
-The local Blueprint project has been created with UE 5.8.4. It was initially created outside the repository and must be copied into unreal/Zhuozhengyuan before repository-based development continues.
+The UE 5.8.4 Blank Blueprint project has been copied into `unreal/Zhuozhengyuan`. The local `.uproject` file is present; opening and saving this repository copy is the remaining local acceptance step.
 
 Do not commit generated Binaries, Intermediate, Saved, DerivedDataCache, or local IDE files.
 
@@ -37,7 +37,7 @@ The Windows environment validator detected the user's installed engine on 2026-1
 - Changelist: **58902052**
 - Editor executable: `Engine/Binaries/Win64/UnrealEditor.exe`
 
-The next local action is to create the Blueprint project from the editor wizard. Do not create a C++ project or compile engine source for P0.
+The project was created as Blueprint, not C++. Do not compile engine source for P0.
 
 ## Project creation settings (already completed)
 
@@ -48,8 +48,8 @@ The next local action is to create the Blueprint project from the editor wizard.
 5. Quality preset: **Scalable** (not Maximum Quality).
 6. Starter Content: **Off**.
 7. Project name: `Zhuozhengyuan`.
-8. The project was initially created outside the repository under the user's Documents directory.
-9. Do not create another project. Use the migration helper below to copy the existing project into `unreal/Zhuozhengyuan`.
+8. The original was created under Documents; a copy now exists at `unreal/Zhuozhengyuan`.
+9. Do not create another project.
 
 If the wizard asks whether to enable ray tracing, leave it disabled. Do not add optional plugins yet.
 
