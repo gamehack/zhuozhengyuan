@@ -39,9 +39,11 @@ function Get-ZjyUnrealEngineRoot {
 
             $AppName = [string]$Manifest.AppName
             $DisplayName = [string]$Manifest.DisplayName
+            # Epic Launcher may use either UE_5.8 or UE_5.8.4 as AppName.
+            # Accept a dot, underscore, or end-of-string after the minor version.
             $IsTargetEngine = (
-                $AppName -match '^UE_5\.8(?:$|_)' -or
-                $DisplayName -match 'Unreal Engine\s+5\.8'
+                $AppName -match '^UE_5\.8(?:\.|$|_)' -or
+                $DisplayName -match '(?i)(?:Unreal Engine|UE)[\s_]+5\.8'
             )
             $InstallLocation = [string]$Manifest.InstallLocation
             if ($IsTargetEngine -and -not [string]::IsNullOrWhiteSpace($InstallLocation)) {
