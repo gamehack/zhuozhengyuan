@@ -12,8 +12,9 @@ Prove a repeatable local pipeline from structured data and Blender Python to FBX
 - [x] Confirm C: free space (117.1 GB on 2026-11-13).
 - [x] Create the UE 5.8.4 Blank Blueprint project locally (initially under Documents, 2026-11-13).
 - [x] Copy the existing project into the repository at unreal/Zhuozhengyuan (project file exists; 2026-11-13).
-- [ ] Open and save the repository copy successfully; verify conservative editor settings.
-- [ ] Keep initial editor settings conservative for Radeon 680M / 16 GB RAM.
+- [x] Open the repository copy successfully and set viewport scalability to Low (2026-11-13).
+- [ ] Save the initial level as Content/Maps/L_Main.umap; current Git status contains no .umap or .uasset files.
+- [x] Set initial viewport scalability to Low for Radeon 680M / 16 GB RAM.
 
 ### P0-2 — Repository foundation
 - [x] Establish project charter and technical direction.
