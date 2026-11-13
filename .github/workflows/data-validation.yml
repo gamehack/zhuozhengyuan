@@ -5,6 +5,7 @@ on:
     paths:
       - "data/**"
       - "research/references.csv"
+      - "scripts/*.ps1"
       - "scripts/validate_data.py"
       - "blender/scripts/**"
       - "tests/**"
@@ -13,6 +14,7 @@ on:
     paths:
       - "data/**"
       - "research/references.csv"
+      - "scripts/*.ps1"
       - "scripts/validate_data.py"
       - "blender/scripts/**"
       - "tests/**"
@@ -24,7 +26,7 @@ permissions:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,6 +36,25 @@ jobs:
           python-version: "3.12"
       - name: Compile Python sources
         run: python -m py_compile scripts/validate_data.py blender/scripts/create_pipeline_test_scene.py blender/scripts/export_fbx.py
+      - name: Validate PowerShell syntax
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $files = Get-ChildItem -Path scripts -Filter *.ps1
+          foreach ($file in $files) {
+            $tokens = $null
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              $file.FullName,
+              [ref]$tokens,
+              [ref]$errors
+            ) | Out-Null
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error $_.ToString() }
+              throw "PowerShell syntax validation failed: $($file.Name)"
+            }
+            Write-Host "PowerShell syntax OK: $($file.Name)"
+          }
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
       - name: Validate project data
