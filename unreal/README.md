@@ -39,7 +39,7 @@ The Windows environment validator detected the user's installed engine on 2026-1
 
 The next local action is to create the Blueprint project from the editor wizard. Do not create a C++ project or compile engine source for P0.
 
-## Exact project creation procedure
+## Project creation settings (already completed)
 
 1. Launch `UnrealEditor.exe` from Epic Games Launcher, or run the detected executable.
 2. In the Project Browser select **Games** → **Blank**.
@@ -48,9 +48,8 @@ The next local action is to create the Blueprint project from the editor wizard.
 5. Quality preset: **Scalable** (not Maximum Quality).
 6. Starter Content: **Off**.
 7. Project name: `Zhuozhengyuan`.
-8. Project location: the repository's `unreal` directory.
-9. Create the project. The expected project file is:
-   `unreal/Zhuozhengyuan/Zhuozhengyuan.uproject`.
+8. The project was initially created outside the repository under the user's Documents directory.
+9. Do not create another project. Use the migration helper below to copy the existing project into `unreal/Zhuozhengyuan`.
 
 If the wizard asks whether to enable ray tracing, leave it disabled. Do not add optional plugins yet.
 
