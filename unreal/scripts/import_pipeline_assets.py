@@ -94,7 +94,6 @@ def import_one_fbx(asset_tools, fbx_path):
     set_if_supported(options, "import_materials", True)
     set_if_supported(options, "import_textures", False)
     set_if_supported(options, "import_animations", False)
-    set_if_supported(options, "import_collision", True)
 
     static_data = options.get_editor_property("static_mesh_import_data")
     set_if_supported(static_data, "combine_meshes", False, required=True)
