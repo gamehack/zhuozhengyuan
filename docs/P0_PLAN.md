@@ -10,7 +10,8 @@ Prove a repeatable local pipeline from structured data and Blender Python to FBX
 - [x] Confirm Blender executable and version from the prior Windows validation (Blender 5.2.4 LTS).
 - [x] Confirm Unreal Engine 5.8.4 installation (Build.version: 5.8.4, changelist 58902052; Windows validation passed 2026-11-13).
 - [x] Confirm C: free space (117.1 GB on 2026-11-13).
-- [ ] Launch Unreal Editor successfully and create/save the local Blueprint project.
+- [x] Create the UE 5.8.4 Blank Blueprint project locally (initially under Documents, 2026-11-13).
+- [ ] Copy the existing project into the repository at unreal/Zhuozhengyuan and verify the repository copy opens and saves.
 - [ ] Keep initial editor settings conservative for Radeon 680M / 16 GB RAM.
 
 ### P0-2 — Repository foundation
