@@ -38,3 +38,12 @@ The build script creates a synthetic Blender pipeline test scene and exports an 
 
 ## Review loop
 A modeling task is not accepted from a single attractive render. Review top-down placement, at least two ground-level views, dimensions and scale, source alignment, silhouette and occlusion, material response, import result in Unreal, and runtime behavior where relevant.
+
+
+## Automation policy
+
+- Do not ask the user to repeat editor clicks that can be represented as source data, scripts, or editor APIs.
+- Prefer one reproducible PowerShell entry point over a sequence of UI instructions.
+- Model collision in Blender and transfer it through FBX naming conventions; do not hand-author collision primitives in the Unreal Static Mesh Editor.
+- Every automation stage must emit a machine-readable report and fail loudly on mismatches.
+- Human involvement is reserved for local execution, approvals, and visual/source-evidence acceptance.
