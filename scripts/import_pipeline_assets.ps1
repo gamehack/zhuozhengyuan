@@ -50,8 +50,18 @@ $Arguments = @(
     "-nosplash",
     "-log=$Log"
 )
-& $UnrealCmd @Arguments
-$ExitCode = $LASTEXITCODE
+$PreviousRepoRoot = $env:ZJY_REPO_ROOT
+$env:ZJY_REPO_ROOT = $RepoRoot
+try {
+    & $UnrealCmd @Arguments
+    $ExitCode = $LASTEXITCODE
+} finally {
+    if ($null -eq $PreviousRepoRoot) {
+        Remove-Item Env:ZJY_REPO_ROOT -ErrorAction SilentlyContinue
+    } else {
+        $env:ZJY_REPO_ROOT = $PreviousRepoRoot
+    }
+}
 if ($ExitCode -ne 0) {
     throw "Unreal automated import failed with exit code $ExitCode. Inspect: $Log"
 }
