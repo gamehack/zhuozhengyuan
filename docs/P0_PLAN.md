@@ -11,7 +11,8 @@ Prove a repeatable local pipeline from structured data and Blender Python to FBX
 - [x] Confirm Unreal Engine 5.8.4 installation (Build.version: 5.8.4, changelist 58902052; Windows validation passed 2026-11-13).
 - [x] Confirm C: free space (117.1 GB on 2026-11-13).
 - [x] Create the UE 5.8.4 Blank Blueprint project locally (initially under Documents, 2026-11-13).
-- [ ] Copy the existing project into the repository at unreal/Zhuozhengyuan and verify the repository copy opens and saves.
+- [x] Copy the existing project into the repository at unreal/Zhuozhengyuan (project file exists; 2026-11-13).
+- [ ] Open and save the repository copy successfully; verify conservative editor settings.
 - [ ] Keep initial editor settings conservative for Radeon 680M / 16 GB RAM.
 
 ### P0-2 — Repository foundation
@@ -36,10 +37,10 @@ Prove a repeatable local pipeline from structured data and Blender Python to FBX
 - [x] Add a collection-scoped FBX export script.
 - [x] Run scripts locally with Blender 5.2.4 (Windows, 2026-11-13).
 - [x] Confirm generated BLEND, FBX, and report (19 mesh objects exported, 2026-11-13).
-- [ ] Verify repeatability with a second clean run and compare object count/naming.
+- [x] Verify repeatability with a second clean run and stable export count (19 meshes on both runs).
 
 ### P0-5 — Unreal import and walkthrough
-- [ ] Create the UE 5.8.4 project locally from the official Blank Blueprint template.
+- [x] Create the UE 5.8.4 Blank Blueprint project locally and place its copy under unreal/Zhuozhengyuan.
 - [ ] Import the calibration FBX.
 - [ ] Verify 1 m scale, axis orientation, normals, materials, and collision.
 - [ ] Create a minimal first-person walkthrough.
