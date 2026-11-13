@@ -195,8 +195,11 @@ def main():
                 "collision_dimensions_match": collision_dimensions_ok,
                 "render_mesh_dimensions_match": mesh_dimensions_ok,
             }
+            item["failed_checks"] = [
+                name for name, passed in item["checks"].items() if not passed
+            ]
             item["status"] = (
-                "PASS" if all(item["checks"].values()) else "FAIL"
+                "PASS" if not item["failed_checks"] else "FAIL"
             )
             ground_result = item
 
@@ -234,11 +237,30 @@ def main():
 try:
     main()
 except Exception as exc:
-    failure_report = {
-        "status": "FAIL",
-        "error": str(exc),
-        "traceback": traceback.format_exc(),
-    }
-    write_report(failure_report)
+    # Preserve the detailed import/validation report written by main().
+    # The previous handler overwrote it with a generic traceback-only report,
+    # hiding the actual failed collision measurements and checks.
+    error_traceback = traceback.format_exc()
+    existing_report = None
+    if os.path.isfile(REPORT_PATH):
+        try:
+            with open(REPORT_PATH, "r", encoding="utf-8") as handle:
+                existing_report = json.load(handle)
+        except Exception:
+            existing_report = None
+
+    if isinstance(existing_report, dict) and "assets" in existing_report:
+        existing_report["status"] = "FAIL"
+        existing_report["execution_error"] = str(exc)
+        existing_report["execution_traceback"] = error_traceback
+        write_report(existing_report)
+    else:
+        failure_report = {
+            "status": "FAIL",
+            "error": str(exc),
+            "traceback": error_traceback,
+        }
+        write_report(failure_report)
+
     unreal.log_error(f"[ZJY PIPELINE] {exc}")
     raise
