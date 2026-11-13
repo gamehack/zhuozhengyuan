@@ -89,3 +89,18 @@ git status --short
 ```
 
 Open the copied project at the repository path once. Confirm it opens, then close the editor. Keep the original Documents copy until the repository copy has been verified and committed.
+
+
+## Automated FBX import and collision validation
+
+The project enables the **PythonScriptPlugin** and **EditorScriptingUtilities** plugins for editor automation. These are editor-only production tools, not gameplay dependencies.
+
+From the repository root, close Unreal Editor and run:
+
+```powershell
+.\scripts\run_pipeline.ps1
+```
+
+The runner regenerates the Blender fixture, exports one FBX per render mesh with its matching collision meshes, imports them through `UnrealEditor-Cmd.exe -run=pythonscript`, and validates the ground collision. Assets are imported into `/Game/PipelineTest_Automated`.
+
+The ground collision is authored in Blender as `UBX_TEST_Ground_10m_00`. Acceptance requires one simple box collision and matching 2000 × 1600 × 24 cm render/collision bounds. See [AUTOMATED_PIPELINE.md](../docs/AUTOMATED_PIPELINE.md). Do not hand-adjust collision in the Static Mesh Editor.
