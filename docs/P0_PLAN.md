@@ -47,6 +47,7 @@ Prove a repeatable local pipeline from structured data and Blender Python to FBX
 - [x] Verify the 1 m calibration cube imports at 100 × 100 × 100 cm in UE 5.8.4 (user screenshot, 2026-11-13).
 - [x] Verify X/Y calibration bar bounds and principal orientation: X bar 200×8×7 cm (minor-axis display discrepancy pending exact bounds); Y bar 8×100×8 cm, aligned with world Y (2026-11-13).
 - [ ] Inspect normals/shading, confirm material assignments, and resolve X-bar 7 cm display discrepancy with exact bounds.
+- [x] Replace oversized test-column collision with one tightly fitting capsule simplified collision (visual inspection, 2026-11-13; asset save pending).
 - [ ] Add and test simple ground collision.
 - [ ] Create a minimal first-person walkthrough.
 - [ ] Record editor performance and memory usage.
