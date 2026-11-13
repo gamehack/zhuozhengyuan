@@ -22,20 +22,21 @@ The build also runs `scripts/validate_asset_exports.py`. It checks that the grou
 
 The report should identify `PIPELINE_TEST_ONLY`, Blender 5.2.4 LTS, metric units, X=east, Y=north, Z=up, and 19 exported mesh objects. Do not add these generated files to Git.
 
-## 2. Import into Unreal
+## 2. Import into Unreal (automated)
 
-1. Open `unreal/Zhuozhengyuan/Zhuozhengyuan.uproject` with Unreal Engine 5.8.4.
-2. In the Content Drawer, create `Content/PipelineTest`.
-3. Open that folder and use **Import** to select `build/pipeline-test/pipeline-test.fbx`.
-4. Import as Static Mesh assets; do not import as a Level/Scene.
-5. Keep **Combine Meshes** disabled so the 19 test objects remain separate.
-6. Keep **Import Uniform Scale = 1.0** and import translation/rotation at zero.
-7. Keep **Force Front X Axis** disabled. Do not apply per-mesh rotations or scale corrections.
-8. Enable **Import Materials** for this first material smoke test. There are no image textures in the fixture.
-9. Use **Import Normals and Tangents** if the FBX import dialog exposes the normal import method.
-10. Keep Nanite disabled and do not generate collision during this first geometry inspection. Confirm the exact options shown by UE 5.8.4 if labels differ.
+The normal path is unattended; do not manually import the fixture FBX files one by one.
 
-If an option is not present in the UE 5.8.4 dialog, leave its equivalent at the engine default and record that fact rather than guessing.
+1. Close Unreal Editor.
+2. From the repository root run:
+
+```powershell
+.\scripts\import_pipeline_assets.ps1
+```
+
+3. The commandlet imports the per-asset FBXs into `/Game/PipelineTest_Automated`.
+4. The script writes `build/pipeline-test/unreal-import-report.json` and exits non-zero if import or collision validation fails.
+
+The aggregate `pipeline-test.fbx` remains available as a geometry-only smoke-test artifact. It is not the collision-validation import source.
 
 ## 3. Expected calibration geometry
 
