@@ -3,7 +3,7 @@
 ## P0 target
 Unreal Engine 5.8.4, Windows, Blueprint-first first-person walkthrough.
 
-The UE 5.8.4 Blank Blueprint project has been copied into `unreal/Zhuozhengyuan`. The local `.uproject` file is present; opening and saving this repository copy is the remaining local acceptance step.
+The UE 5.8.4 Blank Blueprint project is committed in `unreal/Zhuozhengyuan`. Initial project baseline commit: `07c8201`.
 
 Do not commit generated Binaries, Intermediate, Saved, DerivedDataCache, or local IDE files.
 
@@ -17,6 +17,8 @@ For the HP EliteBook 865 G9 (Radeon 680M integrated graphics, 16 GB RAM):
 - Test the FBX calibration cube before importing garden-scale geometry.
 
 ## FBX import acceptance
+
+Use the detailed checklist in [`docs/FBX_IMPORT_CHECKLIST.md`](../docs/FBX_IMPORT_CHECKLIST.md). Import only the synthetic fixture first; do not import any real garden assets until the calibration passes.
 1. Import the pipeline-test FBX.
 2. Confirm the calibration cube measures 100 Unreal units on each side (1 meter).
 3. Confirm the X/Y calibration bars point along the intended project axes.
@@ -37,7 +39,7 @@ The Windows environment validator detected the user's installed engine on 2026-1
 - Changelist: **58902052**
 - Editor executable: `Engine/Binaries/Win64/UnrealEditor.exe`
 
-The project was created as Blueprint, not C++. Do not compile engine source for P0.
+The project was created as Blueprint, not C++. Do not compile engine source for P0. The initial baseline is committed and pushed to `main`.
 
 ## Project creation settings (already completed)
 
