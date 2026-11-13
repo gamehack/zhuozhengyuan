@@ -31,19 +31,25 @@ if (-not $SkipToolDetection) {
         Write-Warning "Blender executable not found. Set BLENDER_EXE or install Blender 5.2.x."
     }
 
-    $UnrealRoots = @()
-    if ($env:UE_5_8_ROOT) { $UnrealRoots += $env:UE_5_8_ROOT }
-    if ($env:UE_ROOT) { $UnrealRoots += $env:UE_ROOT }
-    $UnrealRoots += "$env:ProgramFiles\Epic Games\UE_5.8"
-    $UnrealEditor = $null
-    foreach ($Root in $UnrealRoots) {
-        $Candidate = Join-Path $Root "Engine\Binaries\Win64\UnrealEditor.exe"
-        if (Test-Path $Candidate) { $UnrealEditor = $Candidate; break }
-    }
-    if ($UnrealEditor) {
+    . (Join-Path $PSScriptRoot "resolve-unreal.ps1")
+    $UnrealRoot = Get-ZjyUnrealEngineRoot -RequiredMinorVersion "5.8"
+    if ($UnrealRoot) {
+        $UnrealEditor = Join-Path $UnrealRoot "Engine\Binaries\Win64\UnrealEditor.exe"
         Write-Host "Unreal Editor: $UnrealEditor" -ForegroundColor Green
+
+        $BuildVersionPath = Join-Path $UnrealRoot "Engine\Build\Build.version"
+        if (Test-Path -LiteralPath $BuildVersionPath) {
+            $BuildVersion = Get-Content -LiteralPath $BuildVersionPath -Raw | ConvertFrom-Json
+            $VersionText = "{0}.{1}.{2}" -f $BuildVersion.MajorVersion, $BuildVersion.MinorVersion, $BuildVersion.PatchVersion
+            Write-Host "Unreal Engine version: $VersionText"
+            if ($VersionText -ne "5.8.4") {
+                Write-Warning "Detected UE $VersionText. Project baseline is UE 5.8.4; confirm compatibility before creating the project."
+            }
+        } else {
+            Write-Warning "Unreal Engine Build.version metadata was not found; editor executable exists but exact version is unverified."
+        }
     } else {
-        Write-Warning "Unreal Engine 5.8 installation not detected. This is expected until P0-5."
+        Write-Warning "Unreal Engine 5.8 was not found in configured paths or Epic Games Launcher install manifests."
     }
 
     $Computer = Get-CimInstance Win32_ComputerSystem
