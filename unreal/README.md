@@ -3,7 +3,7 @@
 ## P0 target
 Unreal Engine 5.8.4, Windows, Blueprint-first first-person walkthrough.
 
-Create the project locally from Games > Blank using the Desktop target, Maximum Quality disabled, Starter Content optional, and Blueprint. Name the project Zhuozhengyuan and place the resulting project under this directory.
+The local Blueprint project has been created with UE 5.8.4. It was initially created outside the repository and must be copied into unreal/Zhuozhengyuan before repository-based development continues.
 
 Do not commit generated Binaries, Intermediate, Saved, DerivedDataCache, or local IDE files.
 
@@ -67,3 +67,24 @@ Get-Content $Project
 ```
 
 Expected: `Test-Path` returns `True`. Do not run the packaging script yet; FBX import and first-person walkthrough are still pending.
+
+## Migrate the existing local project into this repository
+
+Do not create a second project. Close Unreal Editor, pull the latest repository, and run the migration helper from the repository root:
+
+```powershell
+git pull origin main
+.\scripts\migrate-unreal-project.ps1 -SourceProjectDirectory 'PATH_TO_THE_EXISTING_ZHUOZHENGYUAN_PROJECT_FOLDER'
+```
+
+The script searches the supplied folder for Zhuozhengyuan.uproject, copies the project into unreal/Zhuozhengyuan, and excludes generated folders (Binaries, DerivedDataCache, Intermediate, Saved, and .vs). It refuses to overwrite an existing destination and never deletes the original project.
+
+After copying:
+
+```powershell
+$Project = ".\unreal\Zhuozhengyuan\Zhuozhengyuan.uproject"
+Test-Path $Project
+git status --short
+```
+
+Open the copied project at the repository path once. Confirm it opens, then close the editor. Keep the original Documents copy until the repository copy has been verified and committed.
