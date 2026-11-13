@@ -84,3 +84,17 @@ See docs/QUALITY_STANDARDS.md. The critical end-to-end test is Blender Python �
 - [P0-04 — Install/confirm UE 5.8.4 and create project](https://github.com/gamehack/zhuozhengyuan/issues/4)
 - [P0-05 — Verify FBX scale, axes, and materials in Unreal](https://github.com/gamehack/zhuozhengyuan/issues/5)
 - [P0-06 — Complete Windows walkthrough and package acceptance](https://github.com/gamehack/zhuozhengyuan/issues/6)
+
+
+## P0 automation correction — 2026-11-14
+
+The manual Static Mesh Editor collision workflow has been stopped. The replacement implementation is documented in [AUTOMATED_PIPELINE.md](AUTOMATED_PIPELINE.md) and is on branch `automation/p0-asset-collision-pipeline`.
+
+Implemented in source:
+- Blender-authored `UBX_TEST_Ground_10m_00` collision box generated from render-mesh bounds.
+- One render mesh per FBX, with matching collision objects included.
+- Per-asset FBX manifest and standard-library validation.
+- Headless Unreal Python importer and machine-readable collision verification.
+- Single-command runner: `.\scripts\run_pipeline.ps1`.
+
+Still pending: execute the new pipeline on the local Windows / UE 5.8.4 installation and obtain a PASS report. Do not mark P0 collision or walkthrough acceptance complete until that local run passes.
