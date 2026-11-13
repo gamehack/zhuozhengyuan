@@ -26,17 +26,17 @@ The report should identify `PIPELINE_TEST_ONLY`, Blender 5.2.4 LTS, metric units
 
 The normal path is unattended; do not manually import the fixture FBX files one by one.
 
-1. Close Unreal Editor.
-2. From the repository root run:
+1. Close Unreal Editor. Do not save the previous manually edited ground collision test asset.
+2. From the repository root run the single entry point:
 
 ```powershell
-.\scripts\import_pipeline_assets.ps1
+.\scripts\run_pipeline.ps1
 ```
 
-3. The commandlet imports the per-asset FBXs into `/Game/PipelineTest_Automated`.
-4. The script writes `build/pipeline-test/unreal-import-report.json` and exits non-zero if import or collision validation fails.
+3. The runner regenerates the Blender fixture, exports the FBXs, invokes the headless Unreal commandlet, and imports the per-asset FBXs into `/Game/PipelineTest_Automated`.
+4. The machine-readable report is written to `build/pipeline-test/unreal-import-report.json`. The command exits non-zero if import or collision validation fails.
 
-The aggregate `pipeline-test.fbx` remains available as a geometry-only smoke-test artifact. It is not the collision-validation import source.
+The aggregate `pipeline-test.fbx` remains available as a collision-free geometry smoke-test artifact. It is not the collision-validation import source.
 
 ## 3. Expected calibration geometry
 
