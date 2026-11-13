@@ -131,6 +131,7 @@ def add_box_collision(render_obj, collection):
     collision.matrix_world = render_obj.matrix_world.copy()
     collision.display_type = "WIRE"
     collision.hide_render = True
+    collision["zjy_test_tag"] = TEST_TAG
     collision["zjy_collision_for"] = render_obj.name
     collision["zjy_collision_shape"] = "box"
     collision["zjy_collision_dimensions_m"] = [
