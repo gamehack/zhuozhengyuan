@@ -48,7 +48,7 @@ $Arguments = @(
     "-unattended",
     "-nop4",
     "-nosplash",
-    "-log=$Log"
+    "-ABSLOG=$Log"
 )
 $PreviousRepoRoot = $env:ZJY_REPO_ROOT
 $env:ZJY_REPO_ROOT = $RepoRoot
@@ -63,7 +63,18 @@ try {
     }
 }
 if ($ExitCode -ne 0) {
-    throw "Unreal automated import failed with exit code $ExitCode. Inspect: $Log"
+    Write-Warning "Unreal automated import exited with code $ExitCode."
+    if (Test-Path -LiteralPath $Report) {
+        Write-Host "=== Unreal validation report ===" -ForegroundColor Yellow
+        Get-Content -LiteralPath $Report -Raw | Write-Host
+    }
+    if (Test-Path -LiteralPath $Log) {
+        Write-Host "=== Unreal log (last 80 lines) ===" -ForegroundColor Yellow
+        Get-Content -LiteralPath $Log -Tail 80 | Write-Host
+    } else {
+        Write-Warning "Expected Unreal log not found at $Log"
+    }
+    throw "Unreal automated import failed with exit code $ExitCode. Report: $Report; Log: $Log"
 }
 if (-not (Test-Path -LiteralPath $Report)) {
     throw "Unreal did not produce the expected verification report: $Report"
