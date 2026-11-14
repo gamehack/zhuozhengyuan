@@ -74,11 +74,10 @@ def inspect_box_collision(static_mesh):
             float(element.get_editor_property("y")),
             float(element.get_editor_property("z")),
         ]
-        # FKBoxElem stores half extents. Also retain raw values in the report
-        # so a future engine API change is diagnosable.
+        # FKBoxElem X/Y/Z are full box lengths (cm), not FBox half-extents.
         result.append({
             "raw_extents_cm": raw,
-            "full_dimensions_cm": [value * 2.0 for value in raw],
+            "full_dimensions_cm": raw,
             "center_cm": vector_components(element.get_editor_property("center")),
         })
     return result
@@ -230,7 +229,7 @@ def main():
 
     if failures:
         raise RuntimeError(
-            "Ground collision validation failed. See unreal-import-report.json."
+            "Ground collision validation failed. Inspect preserved ground_validation checks in unreal-import-report.json."
         )
 
 
