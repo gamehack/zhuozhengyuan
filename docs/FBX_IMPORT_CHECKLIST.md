@@ -13,25 +13,30 @@ From the repository root in PowerShell:
 Expected outputs (ignored by Git):
 
 - `build/pipeline-test/pipeline-test.blend`
-- `build/pipeline-test/pipeline-test.fbx`
+- `build/pipeline-test/pipeline-test.fbx` (geometry-only aggregate smoke-test FBX)
 - `build/pipeline-test/report.json`
+- `build/pipeline-test/assets/*.fbx` (one render mesh per FBX; matching collision meshes included)
+- `build/pipeline-test/assets/asset-export-manifest.json`
+
+The build also runs `scripts/validate_asset_exports.py`. It checks that the ground collision is named `UBX_TEST_Ground_10m_00` and measures 20 × 16 × 0.24 m before Unreal is involved.
 
 The report should identify `PIPELINE_TEST_ONLY`, Blender 5.2.4 LTS, metric units, X=east, Y=north, Z=up, and 19 exported mesh objects. Do not add these generated files to Git.
 
-## 2. Import into Unreal
+## 2. Import into Unreal (automated)
 
-1. Open `unreal/Zhuozhengyuan/Zhuozhengyuan.uproject` with Unreal Engine 5.8.4.
-2. In the Content Drawer, create `Content/PipelineTest`.
-3. Open that folder and use **Import** to select `build/pipeline-test/pipeline-test.fbx`.
-4. Import as Static Mesh assets; do not import as a Level/Scene.
-5. Keep **Combine Meshes** disabled so the 19 test objects remain separate.
-6. Keep **Import Uniform Scale = 1.0** and import translation/rotation at zero.
-7. Keep **Force Front X Axis** disabled. Do not apply per-mesh rotations or scale corrections.
-8. Enable **Import Materials** for this first material smoke test. There are no image textures in the fixture.
-9. Use **Import Normals and Tangents** if the FBX import dialog exposes the normal import method.
-10. Keep Nanite disabled and do not generate collision during this first geometry inspection. Confirm the exact options shown by UE 5.8.4 if labels differ.
+The normal path is unattended; do not manually import the fixture FBX files one by one.
 
-If an option is not present in the UE 5.8.4 dialog, leave its equivalent at the engine default and record that fact rather than guessing.
+1. Close Unreal Editor. Do not save the previous manually edited ground collision test asset.
+2. From the repository root run the single entry point:
+
+```powershell
+.\scripts\run_pipeline.ps1
+```
+
+3. The runner regenerates the Blender fixture, exports the FBXs, invokes the headless Unreal commandlet, and imports the per-asset FBXs into `/Game/PipelineTest_Automated`.
+4. The machine-readable report is written to `build/pipeline-test/unreal-import-report.json`. The command exits non-zero if import or collision validation fails.
+
+The aggregate `pipeline-test.fbx` remains available as a collision-free geometry smoke-test artifact. It is not the collision-validation import source.
 
 ## 3. Expected calibration geometry
 
@@ -65,9 +70,33 @@ Take screenshots of:
 - Calibration cube dimensions in the Static Mesh Editor.
 - X/Y bars aligned against the viewport axis gizmo.
 
-## 5. Collision is a separate sub-step
+## 5. Automated collision import (no Static Mesh Editor hand-editing)
 
-After scale and axes pass, add simple collision to the ground mesh in the Static Mesh Editor (for example, a box collision fitted to the ground). Save the asset and verify collision visualization. First-person collision testing is completed in the later walkthrough task; do not mark the walkthrough complete here.
+Collision geometry is authored in Blender Python and imported with its render mesh.
+
+- Ground render mesh: `TEST_Ground_10m`
+- Ground box collision mesh: `UBX_TEST_Ground_10m_00`
+- Expected dimensions: 20 × 16 × 0.24 m (2000 × 1600 × 24 cm)
+- The `UBX_` prefix tells the Unreal FBX importer to treat the object as a box collision primitive.
+- Each render mesh is exported to its own FBX together with only its matching collision mesh. This is deliberate: Epic's FBX pipeline documentation states that when multiple render meshes with custom collision are in one FBX, only the first mesh's collision is imported.
+
+Run the unattended import and verification from the repository root:
+
+```powershell
+# Close Unreal Editor first so the commandlet can open the project without file locks.
+.\scripts\import_pipeline_assets.ps1
+```
+
+The script uses Unreal Engine 5.8.4's command-line editor and Python Editor Script Plugin. It imports the per-asset FBXs into `/Game/PipelineTest_Automated`, then checks:
+
+- Exactly one simple collision primitive on the ground mesh.
+- Exactly one imported box element.
+- Box dimensions match 2000 × 1600 × 24 cm within 1 cm.
+- Render-mesh bounds match the same expected dimensions within 1 cm.
+
+The machine-readable result is written to `build/pipeline-test/unreal-import-report.json`. The command exits non-zero unless every ground check passes. Do not manually edit collision in the Static Mesh Editor to compensate for a failed automated check; fix the Blender source or import pipeline and rerun.
+
+First-person movement testing remains a separate P0 walkthrough acceptance item.
 
 ## 6. Failure policy
 

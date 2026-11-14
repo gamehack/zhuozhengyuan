@@ -88,6 +88,61 @@ def add_uv_sphere(label, location, scale, collection, material):
     return tag_object(obj, label, collection, material)
 
 
+
+def add_box_collision(render_obj, collection):
+    """Create a UE-compatible UBX box matching the render mesh local bounds."""
+    corners = [Vector(corner) for corner in render_obj.bound_box]
+    minimum = Vector((
+        min(point.x for point in corners),
+        min(point.y for point in corners),
+        min(point.z for point in corners),
+    ))
+    maximum = Vector((
+        max(point.x for point in corners),
+        max(point.y for point in corners),
+        max(point.z for point in corners),
+    ))
+    half = (maximum - minimum) * 0.5
+    center = (maximum + minimum) * 0.5
+
+    vertices = [
+        (center.x - half.x, center.y - half.y, center.z - half.z),
+        (center.x + half.x, center.y - half.y, center.z - half.z),
+        (center.x + half.x, center.y + half.y, center.z - half.z),
+        (center.x - half.x, center.y + half.y, center.z - half.z),
+        (center.x - half.x, center.y - half.y, center.z + half.z),
+        (center.x + half.x, center.y - half.y, center.z + half.z),
+        (center.x + half.x, center.y + half.y, center.z + half.z),
+        (center.x - half.x, center.y + half.y, center.z + half.z),
+    ]
+    faces = [
+        (0, 3, 2, 1), (4, 5, 6, 7),
+        (0, 1, 5, 4), (1, 2, 6, 5),
+        (2, 3, 7, 6), (3, 0, 4, 7),
+    ]
+
+    mesh = bpy.data.meshes.new(f"UBX_{render_obj.name}_00_Mesh")
+    mesh.from_pydata(vertices, [], faces)
+    mesh.update()
+    collision = bpy.data.objects.new(
+        f"UBX_{render_obj.name}_00", mesh
+    )
+    collection.objects.link(collision)
+    collision.matrix_world = render_obj.matrix_world.copy()
+    bpy.context.view_layer.update()
+    collision.display_type = "WIRE"
+    collision.hide_render = True
+    collision["zjy_test_tag"] = TEST_TAG
+    collision["zjy_collision_for"] = render_obj.name
+    collision["zjy_collision_shape"] = "box"
+    collision["zjy_collision_dimensions_m"] = [
+        round(maximum.x - minimum.x, 6),
+        round(maximum.y - minimum.y, 6),
+        round(maximum.z - minimum.z, 6),
+    ]
+    return collision
+
+
 def main():
     args = parse_args()
     blend_output = Path(args.blend_output).resolve()
@@ -145,7 +200,8 @@ def main():
     water = make_material("TEST_MAT_Water", (0.08, 0.20, 0.22), 0.22)
     foliage = make_material("TEST_MAT_Foliage", (0.12, 0.22, 0.10), 0.9)
 
-    add_cube("Ground_10m", (0, 0, -0.12), (20, 16, 0.24), export_collection, stone)
+    ground = add_cube("Ground_10m", (0, 0, -0.12), (20, 16, 0.24), export_collection, stone)
+    ground_collision = add_box_collision(ground, export_collection)
     add_cube("Pond_6x4m", (5.0, 2.0, 0.02), (6.0, 4.0, 0.04), export_collection, water)
     add_cube("White_Wall", (-4.0, 0.0, 1.6), (0.25, 8.0, 3.2), export_collection, plaster)
     add_cube("Window_Trim_Top", (-3.82, 0.0, 2.2), (0.12, 2.0, 0.12), export_collection, timber)
@@ -192,7 +248,15 @@ def main():
         "blender_version": bpy.app.version_string,
         "blend_file": str(blend_output),
         "export_collection": export_collection.name,
-        "export_object_count": len(export_collection.objects),
+        "export_object_count": len([obj for obj in export_collection.objects if obj.get("zjy_export", False)]),
+        "collision_object_count": 1,
+        "collision_objects": [{
+            "name": ground_collision.name,
+            "render_mesh": ground.name,
+            "shape": ground_collision["zjy_collision_shape"],
+            "dimensions_m": [float(value) for value in ground_collision["zjy_collision_dimensions_m"]],
+            "expected_dimensions_m": [20.0, 16.0, 0.24],
+        }],
         "units": "meters",
         "local_axes": {"x": "east", "y": "north", "z": "up"},
         "real_garden_geometry": False,
